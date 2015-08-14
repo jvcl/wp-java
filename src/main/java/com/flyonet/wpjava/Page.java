@@ -28,6 +28,7 @@ public class Page {
     private String link;
     private String date;
     private String modified;
+    private String content_raw;
 
     @Override
     public String toString() {
