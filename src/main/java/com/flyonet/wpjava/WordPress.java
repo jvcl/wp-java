@@ -1,6 +1,7 @@
 package com.flyonet.wpjava;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
@@ -77,8 +78,11 @@ public class WordPress {
             e.printStackTrace();
         }
         if (json != null){
-            Gson gson = new Gson();
-             page = gson.fromJson(json, Page.class);
+            System.out.println("ORIGINAL" + json);
+            Gson gson = new GsonBuilder()
+                    .disableHtmlEscaping()
+                    .create();
+            page = gson.fromJson(json, Page.class);
         }
         return page;
     }

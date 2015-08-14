@@ -22,6 +22,7 @@ public class Page {
     private String title;
     private String status;
     private String type;
+    private Author author;
     private String content;
     private String parent;
     private String link;
@@ -30,6 +31,9 @@ public class Page {
 
     @Override
     public String toString() {
-        return ID + " " + title + " " + status;
+        return ID + " " + title + " " + status + " " + content;
+    }
+    public Author getAuthor(){
+        return author;
     }
 }
