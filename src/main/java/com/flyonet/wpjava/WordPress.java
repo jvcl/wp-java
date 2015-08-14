@@ -26,8 +26,15 @@ public class WordPress {
 
     public WordPress(String url, String username, String password) {
         this.url = url;
+        if (this.url.charAt(this.url.length()-1) == '/')
+            fixURL();
         this.username = username;
         this.password = password;
+    }
+
+    private void fixURL() {
+        url = url.substring(0,url.length()-1);
+        System.out.println("method " + url);
     }
 
     public String getUrl() {
