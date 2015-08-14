@@ -56,7 +56,7 @@ public class WordPress {
     public String getPost(int ID){
         String json = null;
         try {
-            json = Helper.getJSON(url);
+            json = Helper.getJSON(url + "/wp-json/posts/"+ID);
         } catch (IOException e) {
             e.printStackTrace();
         }
