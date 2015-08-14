@@ -27,7 +27,7 @@ public class Helper {
 
     public static String getJSON(String url) throws IOException {
 
-        String json = "";
+        String json = null;
         URL urlConn = new URL(url);
         HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
         yc.connect();
@@ -37,11 +37,13 @@ public class Helper {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         yc.getInputStream()));
                 String inputLine;
+                json = "";
                 while ((inputLine = in.readLine()) != null) {
-                    //System.out.println(inputLine);
                     json = json + inputLine;
                 }
                 in.close();
+            }else {
+                System.out.println("Error: Server response: "+ response);
             }
         }catch (Exception e){
             e.printStackTrace();

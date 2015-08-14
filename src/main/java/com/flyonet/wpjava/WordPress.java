@@ -34,7 +34,6 @@ public class WordPress {
 
     private void fixURL() {
         url = url.substring(0,url.length()-1);
-        System.out.println("method " + url);
     }
 
     public String getUrl() {
