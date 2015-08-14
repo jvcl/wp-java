@@ -24,6 +24,12 @@ public class WordPress {
     private String username;
     private String password;
 
+    /**
+     * Construct a Wordpress resource instance
+     * @param url url of the wordpress resource
+     * @param username username to connect
+     * @param password password of the user
+     */
     public WordPress(String url, String username, String password) {
         this.url = url;
         if (this.url.charAt(this.url.length()-1) == '/')
@@ -32,33 +38,34 @@ public class WordPress {
         this.password = password;
     }
 
+    /**
+     * Remove the slash in the url
+     */
     private void fixURL() {
         url = url.substring(0,url.length()-1);
     }
 
+    /**
+     * Get the url
+     * @return url of wordpress reource
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Set the url of the wordpress resource.
+     * @param url url of the Wordpress rosource ie. http://wp-api.org
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    /**
+     * Get a Page from the wordpress resource
+     * @param ID the ID of the page to be retrieved
+     * @return a Page instance
+     */
     public String getPost(int ID){
         String json = null;
         try {

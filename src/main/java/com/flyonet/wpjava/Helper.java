@@ -26,7 +26,6 @@ import java.net.URL;
 public class Helper {
 
     public static String getJSON(String url) throws IOException {
-
         String json = null;
         URL urlConn = new URL(url);
         HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
