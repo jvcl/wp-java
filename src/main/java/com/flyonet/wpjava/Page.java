@@ -14,7 +14,7 @@ package com.flyonet.wpjava;
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
