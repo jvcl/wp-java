@@ -19,4 +19,14 @@ package com.flyonet.wpjava;
 
 public class Page {
     private int ID;
+    private String title;
+    private String status;
+    private String type;
+    private String content;
+    private String parent;
+    private String link;
+    private String date;
+    private String modified;
+
+
 }
