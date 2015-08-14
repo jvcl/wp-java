@@ -38,6 +38,74 @@ public class Page {
         return author;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getModified() {
+        return modified;
+    }
+
+    public void setContent_raw(String content_raw) {
+        this.content_raw = content_raw;
+    }
+
     private static class Author {
         private int ID;
         private String username;
