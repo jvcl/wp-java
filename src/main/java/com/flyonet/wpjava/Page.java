@@ -28,5 +28,8 @@ public class Page {
     private String date;
     private String modified;
 
-
+    @Override
+    public String toString() {
+        return ID + " " + title + " " + status;
+    }
 }

@@ -1,5 +1,7 @@
 package com.flyonet.wpjava;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
 /**
@@ -66,13 +68,18 @@ public class WordPress {
      * @param ID the ID of the page to be retrieved
      * @return a Page instance
      */
-    public String getPost(int ID){
+    public Page getPost(int ID){
         String json = null;
+        Page page = null;
         try {
             json = Helper.getJSON(url + "/wp-json/posts/"+ID);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return json;
+        if (json != null){
+            Gson gson = new Gson();
+             page = gson.fromJson(json, Page.class);
+        }
+        return page;
     }
 }
