@@ -69,7 +69,7 @@ public class WordPress {
      * @param ID the ID of the page to be retrieved
      * @return a Page instance
      */
-    public Page getPost(int ID){
+    public Page getPage(int ID){
         String json = null;
         Page page = null;
         try {
