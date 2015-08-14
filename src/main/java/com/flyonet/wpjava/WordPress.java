@@ -1,5 +1,7 @@
 package com.flyonet.wpjava;
 
+import java.io.IOException;
+
 /**
  * This file is part of WP-JAVA.
  *
@@ -50,5 +52,14 @@ public class WordPress {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getPost(int ID){
+        String json = null;
+        try {
+            json = Helper.getJSON(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }
