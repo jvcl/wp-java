@@ -132,4 +132,9 @@ public class WordPress {
         }
         return pages;
     }
+    public boolean createPost(Page page){
+        boolean result = false;
+
+        return result;
+    }
 }
