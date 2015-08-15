@@ -66,8 +66,8 @@ public class Page {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(STATUS status) {
+        this.status = status.name().toLowerCase();
     }
 
     public String getType() {
