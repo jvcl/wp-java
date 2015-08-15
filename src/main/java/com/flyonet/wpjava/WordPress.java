@@ -90,11 +90,28 @@ public class WordPress {
         }
         return page;
     }
-    public Collection<Page> getAllPages(){
+    public Collection<Page> getAllPosts(){
         String json = null;
         Collection<Page> pages = null;
         try {
             json = Helper.getJSON(url + "/wp-json/posts/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (json != null){
+            Gson gson = new GsonBuilder()
+                    .disableHtmlEscaping()
+                    .create();
+            Type collectionType = new TypeToken<Collection<Page>>(){}.getType();
+            pages = gson.fromJson(json, collectionType);
+        }
+        return pages;
+    }
+    public Collection<Page> getAllPages(){
+        String json = null;
+        Collection<Page> pages = null;
+        try {
+            json = Helper.getJSON(url + "/wp-json/posts?type=page");
         } catch (IOException e) {
             e.printStackTrace();
         }
