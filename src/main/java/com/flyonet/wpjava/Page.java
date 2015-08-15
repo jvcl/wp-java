@@ -30,6 +30,15 @@ public class Page {
     private String modified;
     private String content_raw;
 
+    private Page(){
+
+    }
+
+    public Page(String title, String content_raw) {
+        this.title = title;
+        this.content_raw = content_raw;
+    }
+
     @Override
     public String toString() {
         return ID + " " + title + " " + status;
