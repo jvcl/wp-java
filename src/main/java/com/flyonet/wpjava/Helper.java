@@ -76,6 +76,9 @@ public class Helper {
             os.write(json.getBytes());
             os.flush();
             int responseCode = yc.getResponseCode();
+            if (responseCode != 200 || responseCode != 201){
+                System.out.println("Error creating post in Wordpress. Check user/password and url");
+            }
 
             yc.disconnect();
         } catch (MalformedURLException e) {
