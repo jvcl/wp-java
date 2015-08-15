@@ -18,7 +18,7 @@ package com.flyonet.wpjava;
  */
 
 public class Page {
-    private int ID;
+    private Integer ID;
     private String title;
     private String status;
     private String type;
