@@ -30,13 +30,16 @@ public class Page {
     private String modified;
     private String content_raw;
 
-    private Page(){
-
+    public enum STATUS {
+        DRAFT, PUBLISH, PENDING, FUTURE, PRIVATE
     }
 
-    public Page(String title, String content_raw) {
+    private Page(){}
+
+    public Page(String title, String content_raw, STATUS status) {
         this.title = title;
         this.content_raw = content_raw;
+        this.status = status.name().toLowerCase();
     }
 
     @Override
