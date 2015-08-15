@@ -88,6 +88,11 @@ public class WordPress {
         }
         return page;
     }
+
+    /**
+     * Returns all posts of the Wordpress blog.
+     * @return a Collection of Pages of type "post"
+     */
     public Collection<Page> getAllPosts(){
         String json = null;
         Collection<Page> pages = null;
@@ -105,6 +110,11 @@ public class WordPress {
         }
         return pages;
     }
+
+    /**
+     * Returns all Pages from the Wordpress blog
+     * @return a Collection of Pages
+     */
     public Collection<Page> getAllPages(){
         String json = null;
         Collection<Page> pages = null;
