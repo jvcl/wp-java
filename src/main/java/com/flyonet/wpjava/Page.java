@@ -32,7 +32,7 @@ public class Page {
 
     @Override
     public String toString() {
-        return ID + " " + title + " " + status + " " + content;
+        return ID + " " + title + " " + status;
     }
     public Author getAuthor(){
         return author;
