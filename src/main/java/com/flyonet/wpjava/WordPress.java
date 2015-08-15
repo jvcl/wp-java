@@ -2,8 +2,13 @@ package com.flyonet.wpjava;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * This file is part of WP-JAVA.
@@ -78,12 +83,28 @@ public class WordPress {
             e.printStackTrace();
         }
         if (json != null){
-            System.out.println("ORIGINAL" + json);
             Gson gson = new GsonBuilder()
                     .disableHtmlEscaping()
                     .create();
             page = gson.fromJson(json, Page.class);
         }
         return page;
+    }
+    public Collection<Page> getAllPages(){
+        String json = null;
+        Collection<Page> pages = null;
+        try {
+            json = Helper.getJSON(url + "/wp-json/posts/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (json != null){
+            Gson gson = new GsonBuilder()
+                    .disableHtmlEscaping()
+                    .create();
+            Type collectionType = new TypeToken<Collection<Page>>(){}.getType();
+            pages = gson.fromJson(json, collectionType);
+        }
+        return pages;
     }
 }
