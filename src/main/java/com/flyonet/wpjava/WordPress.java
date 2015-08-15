@@ -134,7 +134,7 @@ public class WordPress {
     }
     public boolean createPost(Page page){
         boolean result = false;
-
+        Helper.postJSON(url + "/wp-json/posts/", page, username, password);
         return result;
     }
 }

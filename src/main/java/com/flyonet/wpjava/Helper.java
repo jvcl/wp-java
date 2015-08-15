@@ -3,8 +3,14 @@ package com.flyonet.wpjava;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import com.google.gson.Gson;
+import org.apache.commons.codec.binary.Base64;
+
 
 /**
  * This file is part of WP-JAVA.
@@ -50,5 +56,32 @@ public class Helper {
             yc.disconnect();
         }
         return json;
+    }
+
+    public static void postJSON(String url, Page page, String username, String password) {
+        Gson gson = new Gson();
+        String json = gson.toJson(page);
+        try {
+            URL urlConn = new URL(url);
+            HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
+            yc.setDoOutput(true);
+            yc.setRequestProperty("Content-Type", "application/json");
+
+            String authString = username + ":" + password;
+            byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+            String authStringEnc = new String(authEncBytes);
+            yc.setRequestProperty("Authorization", "Basic " + authStringEnc);
+
+            OutputStream os = yc.getOutputStream();
+            os.write(json.getBytes());
+            os.flush();
+            int responseCode = yc.getResponseCode();
+
+            yc.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
