@@ -132,6 +132,11 @@ public class WordPress {
         }
         return pages;
     }
+
+    /**
+     * Create a post in Wordpress
+     * @param page the post to be created in Wordpress.
+     */
     public void createPost(Page page){
         Helper.postJSON(url + "/wp-json/posts/", page, username, password);
     }
