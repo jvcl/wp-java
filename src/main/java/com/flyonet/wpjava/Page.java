@@ -33,13 +33,17 @@ public class Page {
     public enum STATUS {
         DRAFT, PUBLISH, PENDING, FUTURE, PRIVATE
     }
+    public enum TYPE {
+        POST, PAGE, PENDING, FUTURE, PRIVATE
+    }
 
     private Page(){}
 
-    public Page(String title, String content_raw, STATUS status) {
+    public Page(String title, String content_raw, TYPE type, STATUS status) {
         this.title = title;
         this.content_raw = content_raw;
         this.status = status.name().toLowerCase();
+        this.type = type.name().toLowerCase();
     }
 
     @Override
@@ -74,8 +78,8 @@ public class Page {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(TYPE type) {
+        this.type = type.name().toLowerCase();
     }
 
     public void setAuthor(Author author) {
