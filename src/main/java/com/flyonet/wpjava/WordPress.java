@@ -94,21 +94,7 @@ public class WordPress {
      * @return a Collection of Pages of type "post"
      */
     public Collection<Page> getAllPosts(){
-        String json = null;
-        Collection<Page> pages = null;
-        try {
-            json = Helper.getJSON(url + "/wp-json/posts/");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (json != null){
-            Gson gson = new GsonBuilder()
-                    .disableHtmlEscaping()
-                    .create();
-            Type collectionType = new TypeToken<Collection<Page>>(){}.getType();
-            pages = gson.fromJson(json, collectionType);
-        }
-        return pages;
+        return getPostOrPages("/wp-json/posts/");
     }
 
     /**
@@ -116,10 +102,19 @@ public class WordPress {
      * @return a Collection of Pages
      */
     public Collection<Page> getAllPages(){
+        return getPostOrPages("/wp-json/posts?type=page");
+    }
+
+    /**
+     * Get the posts or pages from a Wordpress blog
+     * @param query query and filter to the Wordpress API
+     * @return a collections of pages
+     */
+    private Collection<Page> getPostOrPages(String query){
         String json = null;
         Collection<Page> pages = null;
         try {
-            json = Helper.getJSON(url + "/wp-json/posts?type=page");
+            json = Helper.getJSON(url + query);
         } catch (IOException e) {
             e.printStackTrace();
         }
