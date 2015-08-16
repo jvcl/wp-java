@@ -91,7 +91,6 @@ public class Helper {
                     responseJson = responseJson + inputLine;
                 }
                 in.close();
-                System.out.println(responseJson);
             }
 
             yc.disconnect();

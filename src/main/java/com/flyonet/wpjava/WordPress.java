@@ -139,9 +139,7 @@ public class WordPress {
             Gson gson = new GsonBuilder()
                     .disableHtmlEscaping()
                     .create();
-            System.out.println(json);
             post = gson.fromJson(json, Post.class);
-            System.out.println(post.getID());
         }
         return post;
     }
