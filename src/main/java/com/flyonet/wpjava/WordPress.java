@@ -135,12 +135,13 @@ public class WordPress {
     public Post createPost(Post post){
         String json = null;
         json = Helper.postJSON(url + "/wp-json/posts/", post, username, password);
+
         if (json != null){
             Gson gson = new GsonBuilder()
                     .disableHtmlEscaping()
                     .create();
-            post = gson.fromJson(json, Post.class);
+           return gson.fromJson(json, Post.class);
         }
-        return post;
+        return null;
     }
 }
