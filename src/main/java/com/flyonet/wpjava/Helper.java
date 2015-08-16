@@ -1,18 +1,4 @@
-package com.flyonet.wpjava;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import com.google.gson.Gson;
-import org.apache.commons.codec.binary.Base64;
-
-
-/**
+/*
  * This file is part of WP-JAVA.
  *
  *  WP-JAVA is free software: you can redistribute it and/or modify
@@ -28,6 +14,19 @@ import org.apache.commons.codec.binary.Base64;
  *  You should have received a copy of the GNU General Public License
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package com.flyonet.wpjava;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.google.gson.Gson;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * The Helper handles all connection to the Wordpress API using {@code HttpURLConnection}

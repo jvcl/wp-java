@@ -1,14 +1,4 @@
-package com.flyonet.wpjava;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Collection;
-
-/**
+/*
  * This file is part of WP-JAVA.
  *
  *  WP-JAVA is free software: you can redistribute it and/or modify
@@ -24,6 +14,16 @@ import java.util.Collection;
  *  You should have received a copy of the GNU General Public License
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package com.flyonet.wpjava;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Collection;
 
 /**
  * Wordpress class that implements the most used functions of the API
