@@ -17,7 +17,7 @@ package com.flyonet.wpjava;
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Page {
+public class Post {
     private Integer ID;
     private String title;
     private String status;
@@ -37,9 +37,9 @@ public class Page {
         POST, PAGE, PENDING, FUTURE, PRIVATE
     }
 
-    private Page(){}
+    private Post(){}
 
-    public Page(String title, String content_raw, TYPE type, STATUS status) {
+    public Post(String title, String content_raw, TYPE type, STATUS status) {
         this.title = title;
         this.content_raw = content_raw;
         this.status = status.name().toLowerCase();

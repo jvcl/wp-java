@@ -68,13 +68,13 @@ public class WordPress {
     }
 
     /**
-     * Get a Page from the wordpress resource
+     * Get a Post from the wordpress resource
      * @param ID the ID of the page to be retrieved
-     * @return a Page instance
+     * @return a Post instance
      */
-    public Page getPage(int ID){
+    public Post getPost(int ID){
         String json = null;
-        Page page = null;
+        Post post = null;
         try {
             json = Helper.getJSON(url + "/wp-json/posts/"+ID);
         } catch (IOException e) {
@@ -84,16 +84,16 @@ public class WordPress {
             Gson gson = new GsonBuilder()
                     .disableHtmlEscaping()
                     .create();
-            page = gson.fromJson(json, Page.class);
+            post = gson.fromJson(json, Post.class);
         }
-        return page;
+        return post;
     }
 
     /**
      * Returns all posts of the Wordpress blog.
-     * @return a Collection of Pages of type "post"
+     * @return a Collection of Posts of type "post"
      */
-    public Collection<Page> getAllPosts(){
+    public Collection<Post> getAllPosts(){
         return getPostOrPages("/wp-json/posts/");
     }
 
@@ -101,7 +101,7 @@ public class WordPress {
      * Returns all Pages from the Wordpress blog
      * @return a Collection of Pages
      */
-    public Collection<Page> getAllPages(){
+    public Collection<Post> getAllPages(){
         return getPostOrPages("/wp-json/posts?type=page");
     }
 
@@ -110,9 +110,9 @@ public class WordPress {
      * @param query query and filter to the Wordpress API
      * @return a collections of pages
      */
-    private Collection<Page> getPostOrPages(String query){
+    private Collection<Post> getPostOrPages(String query){
         String json = null;
-        Collection<Page> pages = null;
+        Collection<Post> posts = null;
         try {
             json = Helper.getJSON(url + query);
         } catch (IOException e) {
@@ -122,17 +122,17 @@ public class WordPress {
             Gson gson = new GsonBuilder()
                     .disableHtmlEscaping()
                     .create();
-            Type collectionType = new TypeToken<Collection<Page>>(){}.getType();
-            pages = gson.fromJson(json, collectionType);
+            Type collectionType = new TypeToken<Collection<Post>>(){}.getType();
+            posts = gson.fromJson(json, collectionType);
         }
-        return pages;
+        return posts;
     }
 
     /**
      * Create a post in Wordpress
-     * @param page the post to be created in Wordpress.
+     * @param post the post to be created in Wordpress.
      */
-    public void createPost(Page page){
-        Helper.postJSON(url + "/wp-json/posts/", page, username, password);
+    public void createPost(Post post){
+        Helper.postJSON(url + "/wp-json/posts/", post, username, password);
     }
 }

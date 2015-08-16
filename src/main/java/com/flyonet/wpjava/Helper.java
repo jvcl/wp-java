@@ -58,9 +58,9 @@ public class Helper {
         return json;
     }
 
-    public static void postJSON(String url, Page page, String username, String password) {
+    public static void postJSON(String url, Post post, String username, String password) {
         Gson gson = new Gson();
-        String json = gson.toJson(page);
+        String json = gson.toJson(post);
         try {
             URL urlConn = new URL(url);
             HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
@@ -80,7 +80,7 @@ public class Helper {
             if (responseCode == HttpURLConnection.HTTP_FORBIDDEN){
                 System.out.println("Response "+ responseCode + "Check user/password");
             } else if (responseCode != HttpURLConnection.HTTP_CREATED){
-                System.out.println("Response "+ responseCode + " Error creating post in Wordpress. Check user/password and url");
+                System.out.println("Response "+ responseCode + " Error creating post in WordPress. Check user/password and url");
             }
 
             yc.disconnect();
