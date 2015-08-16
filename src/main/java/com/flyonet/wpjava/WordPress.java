@@ -25,6 +25,9 @@ import java.util.Collection;
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Wordpress class that implements the most used functions of the API
+ */
 public class WordPress {
     private String url;
     private String username;
