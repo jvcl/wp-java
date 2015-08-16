@@ -132,7 +132,17 @@ public class WordPress {
      * Create a post in Wordpress
      * @param post the post to be created in Wordpress.
      */
-    public void createPost(Post post){
-        Helper.postJSON(url + "/wp-json/posts/", post, username, password);
+    public Post createPost(Post post){
+        String json = null;
+        json = Helper.postJSON(url + "/wp-json/posts/", post, username, password);
+        if (json != null){
+            Gson gson = new GsonBuilder()
+                    .disableHtmlEscaping()
+                    .create();
+            System.out.println(json);
+            post = gson.fromJson(json, Post.class);
+            System.out.println(post.getID());
+        }
+        return post;
     }
 }

@@ -58,9 +58,10 @@ public class Helper {
         return json;
     }
 
-    public static void postJSON(String url, Post post, String username, String password) {
+    public static String postJSON(String url, Post post, String username, String password) {
         Gson gson = new Gson();
         String json = gson.toJson(post);
+        String responseJson = null;
         try {
             URL urlConn = new URL(url);
             HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
@@ -81,6 +82,16 @@ public class Helper {
                 System.out.println("Response "+ responseCode + "Check user/password");
             } else if (responseCode != HttpURLConnection.HTTP_CREATED){
                 System.out.println("Response "+ responseCode + " Error creating post in WordPress. Check user/password and url");
+            }else{
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        yc.getInputStream()));
+                String inputLine;
+                responseJson = "";
+                while ((inputLine = in.readLine()) != null) {
+                    responseJson = responseJson + inputLine;
+                }
+                in.close();
+                System.out.println(responseJson);
             }
 
             yc.disconnect();
@@ -89,5 +100,6 @@ public class Helper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return responseJson;
     }
 }
