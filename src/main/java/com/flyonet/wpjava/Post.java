@@ -17,6 +17,10 @@ package com.flyonet.wpjava;
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * The Post class represent a post in a WordPress site. The Post can be either of type {@code post}
+ * or {@code page}
+ */
 public class Post {
     private Integer ID;
     private String title;
@@ -122,6 +126,9 @@ public class Post {
         this.content_raw = content_raw;
     }
 
+    /**
+     * The Author class represents a post author.
+     */
     private static class Author {
         private int ID;
         private String username;

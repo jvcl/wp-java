@@ -29,6 +29,9 @@ import org.apache.commons.codec.binary.Base64;
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * The Helper handles all connection to the Wordpress API using {@code HttpURLConnection}
+ */
 public class Helper {
 
     public static String getJSON(String url) throws IOException {
@@ -81,7 +84,7 @@ public class Helper {
             if (responseCode == HttpURLConnection.HTTP_FORBIDDEN){
                 System.out.println("Response "+ responseCode + "Check user/password");
             } else if (responseCode != HttpURLConnection.HTTP_CREATED){
-                System.out.println("Response "+ responseCode + " Error creating post in WordPress. Check user/password and url");
+                System.out.println("Response " + responseCode + " Error creating post in WordPress. Check user/password and url");
             }else{
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         yc.getInputStream()));
