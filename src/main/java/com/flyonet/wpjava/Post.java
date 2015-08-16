@@ -1,6 +1,4 @@
-package com.flyonet.wpjava;
-
-/**
+/*
  * This file is part of WP-JAVA.
  *
  *  WP-JAVA is free software: you can redistribute it and/or modify
@@ -17,9 +15,12 @@ package com.flyonet.wpjava;
  *  along with WP-JAVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package com.flyonet.wpjava;
+
 /**
  * The Post class represent a post in a WordPress site. The Post can be either of type {@code post}
- * or {@code page}
+ * or {@code page}.
+ * @author Jorge Valdivia
  */
 public class Post {
     private Integer ID;
