@@ -46,4 +46,13 @@ public class WordPressTest {
         assertEquals("page",newPost.getType());
         assertEquals("draft",newPost.getStatus());
     }
+
+    @Test
+    public void testGetPost() throws Exception {
+        Post existingPost = wp.getPost(1);
+        assertEquals("Hello world!",existingPost.getTitle());
+        assertEquals(1,existingPost.getID());
+        assertEquals("post",existingPost.getType());
+        assertEquals("publish",existingPost.getStatus());
+    }
 }
