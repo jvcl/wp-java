@@ -1,4 +1,4 @@
-Copyright (C) <2015>  <Jorge Valdivia>
+Copyright (C) 2015 Jorge Valdivia
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
