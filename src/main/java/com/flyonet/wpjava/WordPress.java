@@ -93,6 +93,15 @@ public class WordPress {
     }
 
     /**
+     * Edit an existing post. The post must have the {@code ID}, {@code title} and {@code content_raw}
+     * set
+     * @param post the post to be edited and send to Wordpress to be updated
+     */
+    public void editPost(Post post){
+
+    }
+
+    /**
      * Returns all posts of the Wordpress blog.
      * @return a Collection of Posts of type "post"
      */
