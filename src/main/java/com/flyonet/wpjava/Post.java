@@ -18,7 +18,6 @@
 package com.flyonet.wpjava;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Post class represent a post in a WordPress site. The Post can be either of type {@code post}
@@ -166,14 +165,23 @@ public class Post {
     public static class Category{
         private Integer ID;
         private String name;
-        String taxonomy = "category";
-        String parent = null;
-        public Category(String name){
-            this.name = name;
+        private String taxonomy;
+        private String parent;
+
+        public Integer getID() {
+            return ID;
         }
 
         public String getName() {
             return name;
+        }
+
+        public String getTaxonomy() {
+            return taxonomy;
+        }
+
+        public String getParent() {
+            return parent;
         }
     }
 }
