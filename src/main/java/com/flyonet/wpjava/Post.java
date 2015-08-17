@@ -17,6 +17,9 @@
 
 package com.flyonet.wpjava;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Post class represent a post in a WordPress site. The Post can be either of type {@code post}
  * or {@code page}.
@@ -34,6 +37,7 @@ public class Post {
     private String date;
     private String modified;
     private String content_raw;
+    private Term terms;
 
     public void fixContent() {
         content_raw = content;
@@ -136,6 +140,10 @@ public class Post {
         this.content_raw = content_raw;
     }
 
+    public ArrayList<Category> getCategories(){
+        return terms.category;
+    }
+
     /**
      * The Author class represents a post author.
      */
@@ -149,6 +157,23 @@ public class Post {
         @Override
         public String toString() {
             return ID + " " + username;
+        }
+    }
+
+    private class Term{
+        private ArrayList<Category> category;
+    }
+    public static class Category{
+        private Integer ID;
+        private String name;
+        String taxonomy = "category";
+        String parent = null;
+        public Category(String name){
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 }
