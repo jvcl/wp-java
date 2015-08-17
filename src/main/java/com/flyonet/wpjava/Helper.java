@@ -82,9 +82,7 @@ public class Helper {
 
             if (responseCode == HttpURLConnection.HTTP_FORBIDDEN){
                 System.out.println("Response "+ responseCode + "Check user/password");
-            } else if (responseCode != HttpURLConnection.HTTP_CREATED){
-                System.out.println("Response " + responseCode + " Error creating post in WordPress. Check user/password and url");
-            }else{
+            } else if (responseCode == HttpURLConnection.HTTP_CREATED || responseCode == HttpURLConnection.HTTP_OK){
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         yc.getInputStream()));
                 String inputLine;
@@ -93,6 +91,8 @@ public class Helper {
                     responseJson = responseJson + inputLine;
                 }
                 in.close();
+            }else{
+                System.out.println("Response " + responseCode + " Error creating post in WordPress. Check user/password and url");
             }
 
             yc.disconnect();
