@@ -99,7 +99,11 @@ public class WordPress {
      * @param post the post to be edited and send to Wordpress to be updated
      */
     public void editPost(Post post){
-
+        if (post.getID() != 0){
+            Helper.postJSON(url + "/wp-json/posts/"+post.getID(), post, username, password);
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
