@@ -89,6 +89,7 @@ public class WordPress {
                     .create();
             post = gson.fromJson(json, Post.class);
         }
+        post.fixContent();
         return post;
     }
 
@@ -136,6 +137,9 @@ public class WordPress {
                     .create();
             Type collectionType = new TypeToken<Collection<Post>>(){}.getType();
             posts = gson.fromJson(json, collectionType);
+        }
+        for (Post p : posts) {
+            p.fixContent();
         }
         return posts;
     }

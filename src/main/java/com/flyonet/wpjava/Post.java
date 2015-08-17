@@ -35,6 +35,11 @@ public class Post {
     private String modified;
     private String content_raw;
 
+    public void fixContent() {
+        content_raw = content;
+        content = null;
+    }
+
     public enum STATUS {
         DRAFT, PUBLISH, PENDING, FUTURE, PRIVATE
     }
@@ -44,9 +49,9 @@ public class Post {
 
     private Post(){}
 
-    public Post(String title, String content_raw, TYPE type, STATUS status) {
+    public Post(String title, String content, TYPE type, STATUS status) {
         this.title = title;
-        this.content_raw = content_raw;
+        this.content_raw = content;
         this.status = status.name().toLowerCase();
         this.type = type.name().toLowerCase();
     }
@@ -92,7 +97,11 @@ public class Post {
     }
 
     public String getContent() {
-        return content;
+        return content_raw;
+    }
+
+    public void setContent(String content) {
+         content_raw = content;
     }
 
     public String getParent() {
