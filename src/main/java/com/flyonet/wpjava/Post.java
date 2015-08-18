@@ -36,7 +36,7 @@ public class Post {
     private String date;
     private String modified;
     private String content_raw;
-    private Term terms;
+    //private Term terms;
 
     public void fixContent() {
         content_raw = content;
@@ -139,9 +139,9 @@ public class Post {
         this.content_raw = content_raw;
     }
 
-    public ArrayList<Category> getCategories(){
-        return terms.category;
-    }
+    //public ArrayList<Category> getCategories(){
+    //    return terms.category;
+    //}
 
     /**
      * The Author class represents a post author.
@@ -159,7 +159,7 @@ public class Post {
         }
     }
 
-    private class Term{
+    public class Term{
         private ArrayList<Category> category;
     }
     public static class Category{
