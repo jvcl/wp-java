@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
@@ -102,5 +103,16 @@ public class Helper {
             e.printStackTrace();
         }
         return responseJson;
+    }
+
+    public void uploadFile(String urlInput){
+        try {
+            URL url = new URL(urlInput);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -164,4 +164,12 @@ public class WordPress {
         }
         return null;
     }
+
+    /**
+     * Upload a media item to the WordPress resource
+     * @param mediaItem The item to be uploaded
+     */
+    public void uploadMedia(MediaItem mediaItem){
+
+    }
 }
