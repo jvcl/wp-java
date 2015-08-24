@@ -39,21 +39,7 @@ public class Helper {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
-
-        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-            @Override
-            public String handleResponse(HttpResponse response) throws IOException {
-                if (response.getStatusLine().getStatusCode() == 200){
-                    HttpEntity entity = response.getEntity();
-                    if (entity != null){
-                        return EntityUtils.toString(entity);
-                    }
-                }
-                return null;
-            }
-        };
-
-        return httpClient.execute(httpGet, responseHandler);
+        return httpClient.execute(httpGet, new ResHandler());
     }
 
     public static String postJSON(String url, String username, String password, String json) throws IOException {
@@ -74,24 +60,24 @@ public class Helper {
         post.setHeader("Authorization", "Basic " + authStringEnc);
         post.setEntity(entity);
 
-        //Handle Response
-        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-            @Override
-            public String handleResponse(HttpResponse response) throws IOException {
-                if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201){
-                    HttpEntity entity = response.getEntity();
-                    if (entity != null){
-                        return EntityUtils.toString(entity);
-                    }
-                }
-                return null;
-            }
-        };
-
-        return httpClient.execute(post, responseHandler);
+        return httpClient.execute(post, new ResHandler());
     }
 
     public static void uploadFile(String urlInput, String username, String password) {
 
+    }
+
+    private static class ResHandler implements ResponseHandler<String>{
+
+        @Override
+        public String handleResponse(HttpResponse response) throws IOException {
+            if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201){
+                HttpEntity entity = response.getEntity();
+                if (entity != null){
+                    return EntityUtils.toString(entity);
+                }
+            }
+            return null;
+        }
     }
 }
