@@ -17,11 +17,9 @@
 
 package com.flyonet.wpjava;
 
-import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -29,12 +27,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import sun.net.www.http.HttpClient;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 
 /**
  * The Helper handles all connection to the Wordpress API using {@code HttpURLConnection}
@@ -64,17 +58,23 @@ public class Helper {
 
     public static String postJSON(String url, String username, String password, String json) throws IOException {
 
-        StringEntity entity = new StringEntity(json);
-        entity.setContentType("application/json");
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost post = new HttpPost(url);
+
+        //Auth
         String authString = username + ":" + password;
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
 
+        //Entity
+        StringEntity entity = new StringEntity(json);
+        entity.setContentType("application/json");
+
+        //Config Request
         post.setHeader("Authorization", "Basic " + authStringEnc);
         post.setEntity(entity);
 
+        //Handle Response
         ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
             @Override
             public String handleResponse(HttpResponse response) throws IOException {
