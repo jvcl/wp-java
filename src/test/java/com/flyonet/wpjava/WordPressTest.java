@@ -55,4 +55,18 @@ public class WordPressTest {
         assertEquals("post",existingPost.getType());
         assertEquals("publish",existingPost.getStatus());
     }
+    @Test
+    public void testEditPost(){
+        Post post = wp.getPost(1);
+        String title = "Test" + new Random().nextInt(1000);
+        post.setTitle(title);
+        wp.editPost(post);
+        post = wp.getPost(1);
+        assertEquals(title, post.getTitle());
+
+        post.setTitle("Hello world!");
+        wp.editPost(post);
+        post = wp.getPost(1);
+        assertEquals("Hello world!", post.getTitle());
+    }
 }
