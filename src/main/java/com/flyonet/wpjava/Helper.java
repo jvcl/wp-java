@@ -24,14 +24,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import sun.net.www.http.HttpClient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class Helper {
 
         ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
             @Override
-            public String handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+            public String handleResponse(HttpResponse response) throws IOException {
                 if (response.getStatusLine().getStatusCode() == 200){
                     HttpEntity entity = response.getEntity();
                     if (entity != null){
@@ -62,48 +62,33 @@ public class Helper {
         return httpClient.execute(httpGet, responseHandler);
     }
 
-    public static String postJSON(String url, Post post, String username, String password) {
-        Gson gson = new Gson();
-        String json = gson.toJson(post);
-        String responseJson = null;
-        try {
-            URL urlConn = new URL(url);
-            HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
-            yc.setDoOutput(true);
-            yc.setRequestProperty("Content-Type", "application/json");
+    public static String postJSON(String url, String username, String password, String json) throws IOException {
 
-            String authString = username + ":" + password;
-            byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
-            String authStringEnc = new String(authEncBytes);
-            yc.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        StringEntity entity = new StringEntity(json);
+        entity.setContentType("application/json");
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost post = new HttpPost(url);
+        String authString = username + ":" + password;
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
 
-            OutputStream os = yc.getOutputStream();
-            os.write(json.getBytes());
-            os.flush();
-            int responseCode = yc.getResponseCode();
+        post.setHeader("Authorization", "Basic " + authStringEnc);
+        post.setEntity(entity);
 
-            if (responseCode == HttpURLConnection.HTTP_FORBIDDEN){
-                System.out.println("Response "+ responseCode + "Check user/password");
-            } else if (responseCode == HttpURLConnection.HTTP_CREATED || responseCode == HttpURLConnection.HTTP_OK){
-                BufferedReader in = new BufferedReader(new InputStreamReader(
-                        yc.getInputStream()));
-                String inputLine;
-                responseJson = "";
-                while ((inputLine = in.readLine()) != null) {
-                    responseJson = responseJson + inputLine;
+        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+            @Override
+            public String handleResponse(HttpResponse response) throws IOException {
+                if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201){
+                    HttpEntity entity = response.getEntity();
+                    if (entity != null){
+                        return EntityUtils.toString(entity);
+                    }
                 }
-                in.close();
-            }else{
-                System.out.println("Response " + responseCode + " Error creating post in WordPress. Check user/password and url");
+                return null;
             }
+        };
 
-            yc.disconnect();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return responseJson;
+        return httpClient.execute(post, responseHandler);
     }
 
     public static void uploadFile(String urlInput, String username, String password) {

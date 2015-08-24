@@ -100,7 +100,12 @@ public class WordPress {
      */
     public void editPost(Post post){
         if (post.getID() != 0){
-            Helper.postJSON(url + "/wp-json/posts/"+post.getID(), post, username, password);
+            Gson gson =  new Gson();
+            try {
+                Helper.postJSON(url + "/wp-json/posts/"+post.getID(), username, password, gson.toJson(post));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else{
             throw new IllegalArgumentException();
         }
@@ -152,9 +157,14 @@ public class WordPress {
      * Create a post in Wordpress
      * @param post the post to be created in Wordpress.
      */
-    public Post createPost(Post post){
+    public Post createPost(Post post)  {
         String json = null;
-        json = Helper.postJSON(url + "/wp-json/posts/", post, username, password);
+        Gson g = new Gson();
+        try {
+            json = Helper.postJSON(url + "/wp-json/posts/", username, password, g.toJson(post));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (json != null){
             Gson gson = new GsonBuilder()
