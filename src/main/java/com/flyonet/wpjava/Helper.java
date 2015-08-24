@@ -20,7 +20,9 @@ package com.flyonet.wpjava;
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -41,21 +43,23 @@ public class Helper {
 
     public static String getJSON(String url) throws IOException {
 
-        String json = null;
-        URL urlConn = new URL(url);
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
-        try {
-            CloseableHttpResponse response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            if (entity!= null){
-                json = EntityUtils.toString(entity);
-                System.out.println(json);
+
+        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+            @Override
+            public String handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+                if (response.getStatusLine().getStatusCode() == 200){
+                    HttpEntity entity = response.getEntity();
+                    if (entity != null){
+                        return EntityUtils.toString(entity);
+                    }
+                }
+                return null;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return json;
+        };
+
+        return httpClient.execute(httpGet, responseHandler);
     }
 
     public static String postJSON(String url, Post post, String username, String password) {
