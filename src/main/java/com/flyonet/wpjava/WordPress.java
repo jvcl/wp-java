@@ -170,6 +170,6 @@ public class WordPress {
      * @param mediaItem The item to be uploaded
      */
     public void uploadMedia(MediaItem mediaItem){
-
+        Helper.uploadFile(url + "/wp-json/media/", username, password);
     }
 }
