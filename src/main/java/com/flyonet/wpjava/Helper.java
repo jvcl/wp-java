@@ -17,17 +17,19 @@
 
 package com.flyonet.wpjava;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 /**
  * The Helper handles all connection to the Wordpress API using {@code HttpURLConnection}
@@ -35,28 +37,20 @@ import org.apache.commons.codec.binary.Base64;
 public class Helper {
 
     public static String getJSON(String url) throws IOException {
+
         String json = null;
         URL urlConn = new URL(url);
-        HttpURLConnection yc = (HttpURLConnection) urlConn.openConnection();
-        yc.connect();
-        int response = yc.getResponseCode();
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet(url);
         try {
-            if (response == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(
-                        yc.getInputStream()));
-                String inputLine;
-                json = "";
-                while ((inputLine = in.readLine()) != null) {
-                    json = json + inputLine;
-                }
-                in.close();
-            }else {
-                System.out.println("Error: Server response: "+ response);
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            if (entity!= null){
+                json = EntityUtils.toString(entity);
+                System.out.println(json);
             }
-        }catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            yc.disconnect();
         }
         return json;
     }
@@ -105,14 +99,7 @@ public class Helper {
         return responseJson;
     }
 
-    public void uploadFile(String urlInput){
-        try {
-            URL url = new URL(urlInput);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void uploadFile(String urlInput, String username, String password) {
+
     }
 }
